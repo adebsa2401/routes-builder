@@ -1,4 +1,14 @@
-import { createRoutes } from '../src'
+import {createRoutes, mergePaths, toKebabCase} from '../src'
+
+test("cast to kebab case", () => {
+  const kebabCase = toKebabCase("HelloWorld")
+  expect(kebabCase).toBe("hello-world")
+})
+
+test("merge paths", () => {
+  const mergedPaths = mergePaths("hello", "world")
+  expect(mergedPaths).toBe("/hello/world")
+})
 
 test('create routes schema', () => {
   const routes = createRoutes({

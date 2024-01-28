@@ -10,7 +10,7 @@ export type Routes = {
  * @example
  * toKebabCase("HelloWorld") // hello-world
  * */
-const toKebabCase = (str: string): string => {
+export const toKebabCase = (str: string): string => {
   return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/\s+/g, '-')
@@ -23,7 +23,7 @@ const toKebabCase = (str: string): string => {
  * @example
  * mergePaths("hello", "world") // /hello/world
  * */
-const mergePaths = (...paths: string[]): string => {
+export const mergePaths = (...paths: string[]): string => {
   const joinedPaths = paths
     .join('/')
     .replace(/\/+/g, '/')
@@ -33,7 +33,7 @@ const mergePaths = (...paths: string[]): string => {
 }
 
 /**
- * Create routes object
+ * Create routes schema
  *
  * @example
  * Basic usage
