@@ -19,7 +19,7 @@
     "isolatedModules": true,
     "incremental": true
   },
-  "include": ["src"],
+  "include": ["src", "specs"],
   "exclude": [
     "dist",
     "node_modules"

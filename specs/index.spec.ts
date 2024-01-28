@@ -10,16 +10,16 @@ test('create routes schema', () => {
         user: (userId: string) => ({
           _basePath: `/${userId}`,
           update: '/update',
-          delete: '/delete',
-        }),
+          delete: '/delete'
+        })
       },
-      blogs: (blogId: string) => `/blogs/${blogId}`,
+      blogs: (blogId: string) => `/blogs/${blogId}`
     },
     auth: {
       _basePath: '',
       login: '/login',
-      register: '/register',
-    },
+      register: '/register'
+    }
   })
 
   expect(routes.index).toBe('/')

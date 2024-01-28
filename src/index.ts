@@ -1,7 +1,7 @@
 export type Routes = {
   _basePath?: string
 } & {
-  [key: string]: string | ((...args: any) => string | Routes) | Routes
+  [key: string]: string | ((...args: any[]) => string | Routes) | Routes
 }
 
 /**
@@ -10,7 +10,7 @@ export type Routes = {
  * @example
  * toKebabCase("HelloWorld") // hello-world
  * */
-const toKebabCase = (str: string) => {
+const toKebabCase = (str: string): string => {
   return str
     .replace(/([a-z])([A-Z])/g, '$1-$2')
     .replace(/\s+/g, '-')
@@ -23,7 +23,7 @@ const toKebabCase = (str: string) => {
  * @example
  * mergePaths("hello", "world") // /hello/world
  * */
-const mergePaths = (...paths: string[]) => {
+const mergePaths = (...paths: string[]): string => {
   const joinedPaths = paths
     .join('/')
     .replace(/\/+/g, '/')
@@ -67,8 +67,8 @@ const mergePaths = (...paths: string[]) => {
  * });
  * routes.users.update(1); // /users/1/update
  * */
-export const createRoutes = <R extends Routes = Routes>(routes: R, basePath: string = '') => {
-  const result = {} as Routes
+export const createRoutes = <R extends Routes = Routes>(routes: R, basePath: string = ''): R => {
+  const result: Routes = {}
 
   Object.entries(routes).forEach(([key, value]) => {
     if (typeof value === 'object') {
@@ -80,7 +80,7 @@ export const createRoutes = <R extends Routes = Routes>(routes: R, basePath: str
     } else if (typeof value === 'string') {
       result[key] = mergePaths(basePath, value)
     } else if (typeof value === 'function') {
-      result[key] = (...args: any) => {
+      result[key] = (...args: any[]) => {
         const path = value(...args)
         if (typeof path === 'string') {
           return mergePaths(basePath, path)
