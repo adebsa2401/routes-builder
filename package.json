@@ -15,7 +15,10 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm run prettier && npm run lint"
   },
-  "repository": "git+https://github.com/adebsa2401/routes-builder.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adebsa2401/routes-builder.git"
+  },
   "author": "Ben Salès (adebsa2401@gmail.com)",
   "license": "MIT",
   "files": [
