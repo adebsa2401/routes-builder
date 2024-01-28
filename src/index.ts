@@ -1,8 +1,8 @@
 export type Routes = {
-  _basePath?: string;
+  _basePath?: string
 } & {
-  [key: string]: string | ((...args: any) => string | Routes) | Routes;
-};
+  [key: string]: string | ((...args: any) => string | Routes) | Routes
+}
 
 /**
  * Convert string to kebab-case
@@ -12,10 +12,10 @@ export type Routes = {
  * */
 const toKebabCase = (str: string) => {
   return str
-    .replace(/([a-z])([A-Z])/g, "$1-$2")
-    .replace(/\s+/g, "-")
-    .toLowerCase();
-};
+    .replace(/([a-z])([A-Z])/g, '$1-$2')
+    .replace(/\s+/g, '-')
+    .toLowerCase()
+}
 
 /**
  * Join paths
@@ -25,12 +25,12 @@ const toKebabCase = (str: string) => {
  * */
 const mergePaths = (...paths: string[]) => {
   const joinedPaths = paths
-    .join("/")
-    .replace(/\/+/g, "/")
-    .replace(/(^\/|\/$)/g, "");
+    .join('/')
+    .replace(/\/+/g, '/')
+    .replace(/(^\/|\/$)/g, '')
 
-  return `/${joinedPaths}`;
-};
+  return `/${joinedPaths}`
+}
 
 /**
  * Create routes object
@@ -67,31 +67,31 @@ const mergePaths = (...paths: string[]) => {
  * });
  * routes.users.update(1); // /users/1/update
  * */
-export const createRoutes = <R extends Routes = Routes>(routes: R, basePath: string = "") => {
-  const result = {} as Routes;
+export const createRoutes = <R extends Routes = Routes>(routes: R, basePath: string = '') => {
+  const result = {} as Routes
 
   Object.entries(routes).forEach(([key, value]) => {
-    if (typeof value === "object") {
+    if (typeof value === 'object') {
       if (value._basePath === undefined) {
-        result[key] = createRoutes(value, mergePaths(basePath, toKebabCase(key)));
+        result[key] = createRoutes(value, mergePaths(basePath, toKebabCase(key)))
       } else {
-        result[key] = createRoutes(value, mergePaths(basePath, value._basePath));
+        result[key] = createRoutes(value, mergePaths(basePath, value._basePath))
       }
-    } else if (typeof value === "string") {
-      result[key] = mergePaths(basePath, value);
-    } else if (typeof value === "function") {
+    } else if (typeof value === 'string') {
+      result[key] = mergePaths(basePath, value)
+    } else if (typeof value === 'function') {
       result[key] = (...args: any) => {
-        const path = value(...args);
-        if (typeof path === "string") {
-          return mergePaths(basePath, path);
+        const path = value(...args)
+        if (typeof path === 'string') {
+          return mergePaths(basePath, path)
         } else if (path._basePath === undefined) {
-          return createRoutes(path, mergePaths(basePath, toKebabCase(key)));
+          return createRoutes(path, mergePaths(basePath, toKebabCase(key)))
         } else {
-          return createRoutes(path, mergePaths(basePath, path._basePath));
+          return createRoutes(path, mergePaths(basePath, path._basePath))
         }
-      };
+      }
     }
-  });
+  })
 
-  return result as R;
-};
+  return result as R
+}
