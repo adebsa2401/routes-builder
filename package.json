@@ -1,7 +1,7 @@
 {
   "name": "@adebsa2401/routes-builder",
-  "version": "1.0.0",
-  "description": "A helper function to easily set up web projects routes system",
+  "version": "1.0.1",
+  "description": "Some helper functions to easily set up web projects routes schema",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -25,6 +25,20 @@
     "dist",
     "LICENSE",
     "README.md"
+  ],
+  "keywords": [
+    "routes",
+    "builder",
+    "react",
+    "reactjs",
+    "react-native",
+    "nextjs",
+    "gatsby",
+    "router",
+    "routing",
+    "schema",
+    "typescript",
+    "ts"
   ],
   "devDependencies": {
     "@types/jest": "^29.5.11",
